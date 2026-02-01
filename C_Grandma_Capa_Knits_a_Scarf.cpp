@@ -141,37 +141,25 @@ void print(const vector<T>& v) { for (const auto& x : v) cout << x << ' '; cout 
 /* ---------- Solve ---------- */
 void solve() {
    ll n;cin>>n;
-    vi a(n);
-    vpii v;
-    for(int i=0;i<n;i++){
-        v.pb({a[i],i});
-    }
-    sort(all(v));
-    vll presum(n);
-    presum[0]=v[0].first;
-    for(int i=1;i<n;i++){
-        presum[i]=presum[i-1]+v[i].first;
-    }
-
-    vll ans(n);
-    for(int i=0;i<n;i++){
-        int j=i;
-        int found=i;
-        while(j<n){
-             int idx=upper_bound(all(v),make_pair(v[j].first,INT_MAX))-v.begin();
-             if(idx==n) break;
-            if(v[idx].first<presum[found]) break;
-            found=idx-j;
-            j=idx;
-        
+   string s;cin>>s;
+   int i,j,cnt=-1;
+   for(char c='a';c<='z';c++){
+     i=0,j=n-1;
+    while(i<j){
+        if(s[i]==s[j]){
+            i++;j--;
         }
-        ans[v[i].second]=found;
-       
-        
-       
-    }
-            print(ans);
+        else if(s[i]==c) i++;
+        else if(s[j]==c)j--;
+        else{
+            break;
+        }
 
+    }
+
+}
+cout<<n-j+1+i<<'\n';
+    
 }
 
 /* ---------- Main ---------- */

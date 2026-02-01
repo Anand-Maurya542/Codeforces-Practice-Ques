@@ -139,39 +139,34 @@ template <typename T>
 void print(const vector<T>& v) { for (const auto& x : v) cout << x << ' '; cout << '\n'; }
 
 /* ---------- Solve ---------- */
+bool possible(vector<ll>& v,int mid,ll k){
+    int used=0;
+    int i=0,n=v.size();
+    while(i<n){
+        int dist=v[i]+2*mid;
+        used++;
+        while(i<n && v[i]<=dist ) i++;
+        if(used>k) return false;
+    }
+    return true;
+}
 void solve() {
-   ll n;cin>>n;
-    vi a(n);
-    vpii v;
-    for(int i=0;i<n;i++){
-        v.pb({a[i],i});
+   ll n,k;cin>>n>>k;
+   vll v(n);
+   read(v);
+   int low=0,high=v.back()-v.front();
+   int ans=high;
+   while(low<=high){
+    int mid=(low+high)/2;
+    if(possible(v,mid,k)){
+        ans=mid;
+        high=mid-1;
     }
-    sort(all(v));
-    vll presum(n);
-    presum[0]=v[0].first;
-    for(int i=1;i<n;i++){
-        presum[i]=presum[i-1]+v[i].first;
-    }
+    else low=mid+1;
+   }
+   cout<<ans<<'\n';
 
-    vll ans(n);
-    for(int i=0;i<n;i++){
-        int j=i;
-        int found=i;
-        while(j<n){
-             int idx=upper_bound(all(v),make_pair(v[j].first,INT_MAX))-v.begin();
-             if(idx==n) break;
-            if(v[idx].first<presum[found]) break;
-            found=idx-j;
-            j=idx;
-        
-        }
-        ans[v[i].second]=found;
-       
-        
-       
-    }
-            print(ans);
-
+    
 }
 
 /* ---------- Main ---------- */
