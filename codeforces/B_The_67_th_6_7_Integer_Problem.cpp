@@ -23,11 +23,12 @@ const long long INF = 1e18;
 //dp.assign(n, -1);
 void solve()
 {
-    int n;
-    cin >> n ;
-    
-    if(((n+1)%3)==0 || ((n-1)%3)==0) cout<<"First"<<'\n';
-    else cout<<"Second"<<"\n";
+    vector<int> a(7);read(a);
+    int x=*max_element(all(a));
+    int sum=accumulate(all(a),0);
+    sum=-sum;
+    sum+=x*2;
+    cout<<sum<<'\n';
     
 }
 

@@ -21,14 +21,24 @@ const long long INF = 1e18;
 // vector<int>dp;
 //dp.assign(n, vector<int>(m, -1));
 //dp.assign(n, -1);
+//priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
+int dir[4][2]={ {1,0},{-1,0}, {0,1}, {0,-1}};      
+// vector<vector<int>> adj(n);
 void solve()
 {
-    int n;
-    cin >> n ;
-    
-    if(((n+1)%3)==0 || ((n-1)%3)==0) cout<<"First"<<'\n';
-    else cout<<"Second"<<"\n";
-    
+    int n, k;
+    cin >> n >> k;
+    string a,b;
+    cin>>a>>b;
+    for(int i=0;i<6;i++){
+        if(a.find(b) != string::npos){
+            cout<<i<<'\n';
+            return;
+        }
+        a+=a;
+        // cout<<a<<"\n";
+    }
+    cout<<-1<<'\n';
 }
 
 int32_t main()

@@ -1,5 +1,3 @@
-// Author: Anand Maurya , MNNIT ALLAHABAD
-
 #include <bits/stdc++.h>
 using namespace std;
 #define all(a) (a).begin(), (a).end()
@@ -8,12 +6,12 @@ inline void yes() { cout << "YES\n"; }
 inline void no()  { cout << "NO\n"; }
 template <typename T>
 void read(vector<T>& v) { for (auto& x : v) cin >> x; }
-
+ 
 template <typename T>
 void print(const vector<T>& v) { for (const auto& x : v) cout << x << ' '; cout << '\n'; }
-
+ 
 #define int long long
-
+ 
 using ll = long long;
 const int MOD = 1e9 + 7;
 const long long INF = 1e18;
@@ -23,23 +21,33 @@ const long long INF = 1e18;
 //dp.assign(n, -1);
 void solve()
 {
-    int n;
-    cin >> n ;
-    
-    if(((n+1)%3)==0 || ((n-1)%3)==0) cout<<"First"<<'\n';
-    else cout<<"Second"<<"\n";
+    int n, m;
+    cin >> n >> m;
+    vector<int> g(n),a(m);read(g);read(a);
+    sort(all(g));sort(all(a));
+    int i=0,j=0;
+    int cnt=0;
+    while(i<n && j<m){
+        if(a[j]>g[i]){
+        j++;i++;
+         cnt++;
+        }else{
+            j++;
+        }
+    }
+    cout<<cnt<<'\n';
     
 }
-
+ 
 int32_t main()
 {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-
+ 
     int t = 1;
     cin >> t;
     while (t--)
         solve();
-
+ 
     return 0;
 }

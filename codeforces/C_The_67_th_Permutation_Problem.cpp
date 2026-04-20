@@ -12,7 +12,7 @@ void read(vector<T>& v) { for (auto& x : v) cin >> x; }
 template <typename T>
 void print(const vector<T>& v) { for (const auto& x : v) cout << x << ' '; cout << '\n'; }
 
-#define int long long
+// #define int long long
 
 using ll = long long;
 const int MOD = 1e9 + 7;
@@ -25,9 +25,29 @@ void solve()
 {
     int n;
     cin >> n ;
+  
+   
+    int j=n*3;
+    int i=1;
+    for(int k=0;k<n;k++){
+        cout<<i++<<' ';
+        // cout<<a[k]<<' ';
+       
+        for(int l=1;l<=2;l++){
+            cout<<j<<' ';j--;
+            
+            // cout<<a[k]<<' ';
+          
+
+
+        }
+       
+    }
+    cout<<'\n';
+
     
-    if(((n+1)%3)==0 || ((n-1)%3)==0) cout<<"First"<<'\n';
-    else cout<<"Second"<<"\n";
+    // print(a);
+    
     
 }
 

@@ -25,9 +25,16 @@ void solve()
 {
     int n;
     cin >> n ;
-    
-    if(((n+1)%3)==0 || ((n-1)%3)==0) cout<<"First"<<'\n';
-    else cout<<"Second"<<"\n";
+    int sum=0;
+    if(n==1){
+        cout<<1<<"\n";
+        return;
+    }
+    while(n>1){
+        sum+=n;
+        n/=2;
+    }
+    cout<<sum+1<<'\n';
     
 }
 

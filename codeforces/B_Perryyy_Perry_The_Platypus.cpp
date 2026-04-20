@@ -12,7 +12,7 @@ void read(vector<T>& v) { for (auto& x : v) cin >> x; }
 template <typename T>
 void print(const vector<T>& v) { for (const auto& x : v) cout << x << ' '; cout << '\n'; }
 
-#define int long long
+// #define int long long
 
 using ll = long long;
 const int MOD = 1e9 + 7;
@@ -23,11 +23,24 @@ const long long INF = 1e18;
 //dp.assign(n, -1);
 void solve()
 {
-    int n;
-    cin >> n ;
-    
-    if(((n+1)%3)==0 || ((n-1)%3)==0) cout<<"First"<<'\n';
-    else cout<<"Second"<<"\n";
+    int n, d;
+    cin >> n >> d;
+    vector<int> a(n);read(a);
+    vector<int> dp(d+1,1e9);dp[0]=0;
+    sort(all(a));
+    for(int i=1;i<=d;i++){
+        for(int j=n-1;j>=0;j--){
+            if(a[j]<=i){
+                dp[i]=min(dp[i],1+dp[i-a[j]]);
+            }
+        }
+
+    }
+    if(dp[d]<1e9)
+    cout<<dp[d]<<'\n';
+    else cout<<-1<<'\n';
+    // cout<<(dp[d]!=1e9)?dp[d]:-1<<'\n';
+
     
 }
 

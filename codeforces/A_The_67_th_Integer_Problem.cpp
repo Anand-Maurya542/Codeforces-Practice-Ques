@@ -5,12 +5,21 @@ using namespace std;
 #define all(a) (a).begin(), (a).end()
 /* ---------- Output Helpers ---------- */
 inline void yes() { cout << "YES\n"; }
-inline void no()  { cout << "NO\n"; }
+inline void no() { cout << "NO\n"; }
 template <typename T>
-void read(vector<T>& v) { for (auto& x : v) cin >> x; }
+void read(vector<T> &v)
+{
+    for (auto &x : v)
+        cin >> x;
+}
 
 template <typename T>
-void print(const vector<T>& v) { for (const auto& x : v) cout << x << ' '; cout << '\n'; }
+void print(const vector<T> &v)
+{
+    for (const auto &x : v)
+        cout << x << ' ';
+    cout << '\n';
+}
 
 #define int long long
 
@@ -19,16 +28,17 @@ const int MOD = 1e9 + 7;
 const long long INF = 1e18;
 // vector<vector<int>>dp;
 // vector<int>dp;
-//dp.assign(n, vector<int>(m, -1));
-//dp.assign(n, -1);
+// dp.assign(n, vector<int>(m, -1));
+// dp.assign(n, -1);
 void solve()
 {
     int n;
-    cin >> n ;
-    
-    if(((n+1)%3)==0 || ((n-1)%3)==0) cout<<"First"<<'\n';
-    else cout<<"Second"<<"\n";
-    
+    cin >> n;
+    cout<<n<<'\n';
+    // if (n > 0)
+    //     cout << n + 1 << '\n';
+    // else
+    //     cout << n + 1 << '\n';
 }
 
 int32_t main()

@@ -21,13 +21,19 @@ const long long INF = 1e18;
 // vector<int>dp;
 //dp.assign(n, vector<int>(m, -1));
 //dp.assign(n, -1);
+int dir[4][2]={ {1,0},{-1,0}, {0,1}, {0,-1}};   
+int help(int x,int y){
+    if(x==y) return 0;     
+    if(x>y) return x-y;
+    if(y%2==0) return 1+help(x,y/2);
+    return 1+help(x,y+1);
+}   
 void solve()
 {
-    int n;
-    cin >> n ;
-    
-    if(((n+1)%3)==0 || ((n-1)%3)==0) cout<<"First"<<'\n';
-    else cout<<"Second"<<"\n";
+    int n, k;
+    cin >> n >> k;
+    int ans=help(n,k);
+    cout<<ans<<"\n";
     
 }
 
@@ -37,7 +43,7 @@ int32_t main()
     cin.tie(nullptr);
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
         solve();
 
