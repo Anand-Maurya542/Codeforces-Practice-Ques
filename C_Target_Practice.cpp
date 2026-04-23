@@ -21,14 +21,26 @@ const long long INF = 1e18;
 // vector<int>dp;
 //dp.assign(n, vector<int>(m, -1));
 //dp.assign(n, -1);
+//priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
+int dir[4][2]={ {1,0},{-1,0}, {0,1}, {0,-1}};      
+// vector<vector<int>> adj(n);
 void solve()
 {
-    vector<int> a(7);read(a);
-    int x=*max_element(all(a));
-    int sum=accumulate(all(a),0);
-    sum=-sum;
-    sum+=x*2;
-    cout<<sum<<'\n';
+    int n=10,m=10;
+    int cnt=0;
+    for(int i=0; i<10; i++){
+        for(int j=0; j<10; j++){
+            char ch; cin>>ch;
+            if(ch=='X'){
+                if(i==0 || j==0 || i==9 || j==9) cnt+=1;
+                else if(i==1 || j==1 || i==8 || j==8) cnt+=2;
+                else if(i==2 || j==2 || i==7 || j==7) cnt+=3;
+                else if(i==3 || j==3 || i==6 || j==6) cnt+=4;
+                else cnt+=5;
+            }
+        }
+    }
+    cout<<cnt<<"\n";
     
 }
 

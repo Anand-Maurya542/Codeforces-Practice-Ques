@@ -21,20 +21,20 @@ const long long INF = 1e18;
 // vector<int>dp;
 //dp.assign(n, vector<int>(m, -1));
 //dp.assign(n, -1);
+//priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
+int dir[4][2]={ {1,0},{-1,0}, {0,1}, {0,-1}};      
+// vector<vector<int>> adj(n);
 void solve()
 {
     int n;
     cin >> n ;
-    int sum=0;
-    if(n==1){
-        cout<<1<<"\n";
-        return;
+    
+    int cnt=INT_MAX;
+    for(int i=0; i<n ;i++){
+        int x; cin>>x;
+        cnt=min(abs(x),cnt);
     }
-    while(n>1){
-        sum+=n;
-        n/=2;
-    }
-    cout<<sum+1<<'\n';
+    cout<<cnt<<'\n';
     
 }
 
@@ -44,7 +44,7 @@ int32_t main()
     cin.tie(nullptr);
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
         solve();
 

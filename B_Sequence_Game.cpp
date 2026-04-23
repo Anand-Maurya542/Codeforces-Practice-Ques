@@ -21,30 +21,32 @@ const long long INF = 1e18;
 // vector<int>dp;
 //dp.assign(n, vector<int>(m, -1));
 //dp.assign(n, -1);
-int find_level(vector<int>& parent, vector<int> &level, int node){
-    if(node==0) return 0;
-    if(level[node]!=0) return level[node];
-    return 1+find_level(parent, level,parent[node] );
-}
+//priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
+int dir[4][2]={ {1,0},{-1,0}, {0,1}, {0,-1}};      
+// vector<vector<int>> adj(n);
 void solve()
 {
     int n;
     cin >> n;
-    vector<int> parent(n+1);
-    vector<int> level(n+1,0);
-    for(int i=1;i<=n;i++){
-        cin>>parent[i];
-        if(parent[i]==-1) parent[i]=0;
-    }
-    level[0]=0;
+    int prev=0;
+    int x;
+    vector<int> ans;
+    for(int i=0; i<n ;i++){
+        cin>>x;
+        if(x>=prev){
+            ans.push_back(x);
+        }else{
+            
+            ans.push_back(x);
+            ans.push_back(x);
 
-    int ans=1;
-    for(int node=1; node<=n; node++){
-        level[node]=find_level(parent,level,node);
-        ans=max(ans,level[node]);
-    }
-    cout<<ans<<'\n';
+            
+        }
 
+        prev=x;
+    }
+    cout<<ans.size()<<'\n';
+    print(ans);
     
 }
 
@@ -54,7 +56,7 @@ int32_t main()
     cin.tie(nullptr);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
         solve();
 
