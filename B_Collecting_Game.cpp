@@ -11,53 +11,47 @@ void solve()
 {
     int n;
     cin >> n ;
-    vector<pair<int, int>> a(n);
-    for(int i=0; i<n; i++){
-        int x; cin>>x;
-        a[i]={x,i};
-    }
+    vector<int> a(n);
+    for(int &x:a) cin>>x;
+    
+    vector<int> order(n);
+    vector<int> arr = a;
+    sort(arr.begin(), arr.end());
 
-
-
-    sort(a.begin(), a.end());
-
-    vector<int> pre(n);
-    pre[0]=a[0].first;
-    for(int i=1; i<n; i++){
-        pre[i]=pre[i-1]+a[i].first;
-    }
+    iota(order.begin(), order.end(), 0);
+    sort(order.begin(), order.end(), [&](int &i, int &j){
+        return a[i] < a[j];
+    });
 
     vector<int> ans(n);
 
-    for(int i=0 ;i<n; i++){
-        int j=i;
-        int found = i; //no of additional elements
+    vector<int> pre(n, 0LL);
+    pre[0]=arr[0];
+    for(int i=1; i<n; i++){
+        pre[i]=pre[i-1] + arr[i];
+    }
+    for(int i=0; i<n; i++){
+        int cnt = i;
+        int idx = i;
 
-        while(j < n){
-            pair<int, int> p = {pre[j] + 1, INT_MIN};
+        while(idx < n){
 
-            int idx = lower_bound(a.begin(), a.end(), p) - a.begin();
+            auto it = lower_bound(arr.begin(), arr.end(), pre[idx]+1) - arr.begin();
+            it--;
+            if(it == idx) break; //no new elements found
 
-            idx--;
-            if(idx == j) break;
-
-            found += idx-j;
-
-            j = idx;
+            cnt += it - idx;
+            idx = it;
         }
 
-        ans[a[i].second] = found;
-
+        ans[order[i]] = cnt;
     }
-
-    for(int i=0; i<n; i++){
-        cout<<ans[i]<<' ';
+    for(int &x : ans){
+        cout<<x<<' ';
     }
     cout<<'\n';
-
-    //1,2,4,5,20
-    //1,3,7,12,32
     
+
 }
 
 int32_t main()

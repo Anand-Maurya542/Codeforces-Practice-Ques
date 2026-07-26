@@ -6,42 +6,43 @@ using namespace std;
 
 using ll = long long;
 const int MOD = 1e9 + 7;
-int n, m;
-vector<int> load;
-//1,2,1,2
-bool valid(vector<int>& a, int t){
-    int need=0, help=0;
-    for(int i=1; i<=n; i++){
-        if(load[i] > t){
-            need += load[i] - t;
-        }else help += (t-load[i])/2;
+
+bool valid(vector<int>& cnt, int n, int T){
+    
+    int help = 0, rem = 0;
+    
+    for(int i=0; i<n; i++){
+        if(cnt[i] > T){
+            rem += cnt[i]-T;
+        }else{
+            help += (T-cnt[i])/2;
+        }
     }
-    return help >= need;
+    return rem <= help;
 }
 
 void solve()
 {
-    cin >> n >> m;
-    vector<int> a(m);
-    load.assign(n+1,0);
-    for (int &x : a){
-        cin >> x;
-        load[x]++;
+    int n, k;
+    cin >> n >> k;
+    vector<int> tasks(k);
+    vector<int> cnt(n);
+    for(int &x:tasks){
+        int t; cin>>t;
+        x = t-1;
     }
-    
-
-    int lo = 0, hi = 2 * m;
-    int ans = 0;
-
-    while (lo <= hi)
-    {
-        int mid = (lo + hi) / 2;
-        if(valid(a, mid)){
-            ans = mid;
-            hi=mid-1;
+    for(int& x : tasks){
+        cnt[x]++;
+    }
+    int lo = 0, hi = 2 * k;
+    while(lo<=hi){
+        int mid = lo + (hi-lo)/2;
+        if(valid(cnt, n, mid)){
+            hi = mid-1;
         }else lo=mid+1;
     }
-    cout<<ans<<'\n';
+    cout<<lo<<'\n';
+    
 }
 
 int32_t main()

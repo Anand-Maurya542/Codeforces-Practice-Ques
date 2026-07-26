@@ -6,60 +6,47 @@ using namespace std;
 
 using ll = long long;
 const int MOD = 1e9 + 7;
-vector<pair<int,int>> arr;
-int n;
 
-bool check(int mid){
-    int currMin = 0;
-    int currMax = 0;
+int n;
+vector<pair<int,int>> segments;
+
+bool valid(int k){
+    int left = 0, right = 0;
 
     for(int i=0; i<n; i++){
-        auto& [start, end] = arr[i];
+        auto [start,end] = segments[i];
+        left -= k;
+        right += k;
 
-        currMin -= mid;
-        currMax +=mid;
-
-        //intersection
-        int recStart = max(currMin, start);
-        int recEnd = min(currMax, end);
-
-        //empty -> intersectio
-
-        if(recStart > recEnd) return false;
+        left = max(left, start);
+        right = min(right, end);
         
-        currMin = recStart;
-        currMax = recEnd;
+        if(left > right) return false;
+        
     }
     return true;
 }
-
 void solve()
 {
+    segments.clear();
     cin >> n ;
-    arr.resize(n);
+    int maxi = 0;
     for(int i=0; i<n; i++){
-        int a,b;
-        cin>>a>>b;
-        arr[i]={a,b};
+        int l,r; cin>>l>>r;
+        maxi = max(maxi, r);
+        segments.push_back({l,r});
     }
 
-    int lo = 0, hi = 1e9;
-    int ans = -1;
+    int lo = 0, hi = maxi;
+
 
     while(lo<=hi){
         int mid = lo + (hi-lo)/2;
-
-        if(check(mid)){
-            ans = mid;
-            hi=mid-1;
-
-
-        }else lo=mid+1;
-
-        
-
+        if(valid(mid)){
+            hi = mid-1;
+        }else lo = mid+1;
     }
-    cout<<ans<<'\n';
+    cout<<lo<<'\n';
 
     
 }

@@ -21,8 +21,9 @@ void solve()
 
 for(int i = 0; i < n; i++)
     dist[i][i] = 0;
-//  dist.assign(n+1, inf);
-   for (int i = 0; i < m; i++){
+
+//input
+    for (int i = 0; i < m; i++){
       ll u, v, c;
       cin>>u>>v>>c;
       u--;v--;
@@ -31,7 +32,7 @@ for(int i = 0; i < n; i++)
      
     }
 
-     for(int k=0; k<n; k++){
+    for(int k=0; k<n; k++){
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
                 if(dist[i][k] != inf && dist[k][j] != inf){
@@ -39,7 +40,7 @@ for(int i = 0; i < n; i++)
                 }
             }
         }
-     }
+    }
 
      for(int i=0; i<q; i++){
         int a,b;

@@ -25,22 +25,19 @@ void solve()
     vector<int> res;
     deque<int> dq;
 
-    for(int i=0; i<n; i++){
-        //remove
-
-        if(!dq.empty() && dq.front() <= i-k) dq.pop_front();
-
-        //maintain increasing order
-        while(!dq.empty() && v[i] <= v[dq.back()] ) dq.pop_back();
-
+    for(int i=0; i<k; i++){
+        while(!dq.empty() && v[dq.back()] >= v[i]) dq.pop_back();
         dq.push_back(i);
-
-        if(i+1 >= k){
-            res.push_back(v[dq.front()]);
-        }
-
-
     }
+    res.push_back(v[dq.front()]);
+
+    for(int i=k; i<n; i++){
+        if(!dq.empty() && dq.front() < i-k+1) dq.pop_front();
+        while(!dq.empty() && v[dq.back()] >= v[i]) dq.pop_back();
+        dq.push_back(i);
+        res.push_back(v[dq.front()]);
+    }
+
     int ans=0;
     for(int& x : res){
 
