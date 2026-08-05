@@ -13,10 +13,15 @@ void solve()
     cin >> n >> k;
     vector<int> a(n);
     for(int &x:a) cin>>x;
-    
-    int lo = 1;
-    int hi = *max_element(a.begin(), a.end()) * k;
+    for(int i=0 ; i<k; i++){
+        int x; cin>>x;
 
+        auto j = lower_bound(a.begin(), a.end(),x);
+        cout<<1+j-a.begin()<<"\n";
+
+        
+    }
+    
 }
 
 int32_t main()
@@ -25,7 +30,7 @@ int32_t main()
     cin.tie(nullptr);
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
         solve();
 

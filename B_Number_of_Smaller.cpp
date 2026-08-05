@@ -11,12 +11,22 @@ void solve()
 {
     int n, k;
     cin >> n >> k;
-    vector<int> a(n);
+    vector<int> a(n),b(k);
     for(int &x:a) cin>>x;
-    
-    int lo = 1;
-    int hi = *max_element(a.begin(), a.end()) * k;
+    for(int &x:b) cin>>x;
 
+    int i=0, j=0;
+    while(i<n & j<k){
+        if(a[i]<b[j]) i++;
+        else{
+            cout<<i<<' ';
+            j++;
+        }
+    }
+    while(j++<k) cout<<n<<' ';
+    cout<<'\n';
+
+    
 }
 
 int32_t main()
@@ -25,7 +35,7 @@ int32_t main()
     cin.tie(nullptr);
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
         solve();
 
