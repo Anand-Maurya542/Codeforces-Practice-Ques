@@ -9,24 +9,28 @@ const int MOD = 1e9 + 7;
 
 void solve()
 {
-    int n, l,r;
-    cin >> n >> l>>r;
+    int n;
+    cin >> n;
     vector<int> a(n);
     for(int &x:a) cin>>x;
-
     sort(a.begin(), a.end());
 
-    int ans = 0;
-    for(int i = 0; i<n; i++){
-        int lo = l - a[i];
-        int hi = r - a[i];
-        int f = lower_bound(a.begin()+i+1, a.end(), lo)-a.begin();
-        int s = upper_bound(a.begin()+i+1, a.end(), hi)-a.begin();
+    int k; cin>>k;
 
-        ans += s-f;
+    for(int i=0 ; i<k; i++){
+        int l; cin>>l;
+        int r; cin>>r;
 
+
+        auto left = lower_bound(a.begin(), a.end(),l)-a.begin();
+        auto right = upper_bound(a.begin(), a.end(), r)-a.begin();
+        cout<<right-left<<' ';
+
+
+        
     }
-    cout<<ans<<'\n';
+    cout<<'\n';
+    
 }
 
 int32_t main()
@@ -35,7 +39,7 @@ int32_t main()
     cin.tie(nullptr);
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
         solve();
 

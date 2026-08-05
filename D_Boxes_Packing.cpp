@@ -9,14 +9,21 @@ const int MOD = 1e9 + 7;
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int n,m, k;
+    cin >> n >> m>> k;
     vector<int> a(n);
     for(int &x:a) cin>>x;
-    
-    int lo = 1;
-    int hi = *max_element(a.begin(), a.end()) * k;
 
+    int j=n-1;
+    for(int i=1; i<=m; i++){
+        int sum = k;
+        while(j>=0 && a[j]<=sum){
+            sum-=a[j];
+            j--;
+        }
+    }
+    cout<<n-j-1<<'\n';
+    
 }
 
 int32_t main()
@@ -25,7 +32,9 @@ int32_t main()
     cin.tie(nullptr);
 
     int t = 1;
-    cin >> t;
+
+    // cin >> t;
+
     while (t--)
         solve();
 

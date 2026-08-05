@@ -6,6 +6,7 @@ using namespace std;
 
 using ll = long long;
 const int MOD = 1e9 + 7;
+
 struct Node{
     int val;
     int g;
@@ -15,14 +16,14 @@ struct GCDQ{
     stack<Node> left, right;
 
     void push(int x){
-        int g = right.empty() ? x : right.top().g | x;
+        int g = right.empty() ? x : gcd(right.top().g, x);
         right.push({x,g});
     }
     void transfer(){
         while(!right.empty()){
             int x = right.top().val;
             right.pop();
-            int g = left.empty() ? x : left.top().g | x;
+            int g = left.empty() ? x : gcd(left.top().g, x);
             left.push({x,g});
         }
     }
@@ -33,7 +34,7 @@ struct GCDQ{
     int getGCD(){
         if(left.empty()) return right.top().g;
         if(right.empty()) return left.top().g;
-        return left.top().g | right.top().g;
+        return gcd(left.top().g, right.top().g);
     }
     bool empty(){
         return left.empty() && right.empty();
@@ -45,40 +46,29 @@ struct GCDQ{
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    
-    int x,a,b,c;
-    cin>>x>>a>>b>>c;
+    int n;
+    cin >> n ;
+    vector<int> a(n);
+    for(int &x:a) cin>>x;
 
-    vector<int> v(n,0);
-    v[0]=x;
-
-    for(int i=1; i< n; i++){
-        v[i]=(v[i-1]*a + b)%c;
-    }
-    
-    
-
-    int ans = 0;
-    int l = 0;
     GCDQ q;
-    for(int r=0; r<n; r++){
-        q.push(v[r]);
-        if(r-l+1 > k){
-            q.pop();
 
-            l++;
-        }
-        if(r-l+1 == k){
-            ans ^= q.getGCD();
+    int l=0, ans = INT_MAX;
+    for(int r=0; r<n; r++){
+        q.push(a[r]);
+        while(!q.empty() && q.getGCD() == 1){
+            ans = min(ans, q.size());
+            q.pop();
         }
     }
-    
+    if(ans==INT_MAX) cout<<-1<<'\n';
+    else
     cout<<ans<<'\n';
-       
+
+
+
+
     
-   
 
     
 }

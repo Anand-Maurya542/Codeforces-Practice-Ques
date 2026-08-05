@@ -7,11 +7,18 @@ using namespace std;
 using ll = long long;
 const int MOD = 1e9 + 7;
 
-bool valid(int x, int w, int h, int n){
-    int max_w = x/w;
-    int max_h = x/h;
-    if(max_w ==0 || max_h == 0) return false;
-    return max_w >= (n+max_h-1)/max_h;
+bool valid(int side, int w, int h, int n){
+    int cols = side/w;
+    int rows = side/h; //ek col me itne log aayenge
+
+    //simple logic => cols * rows >= n
+    //but to avoid interger overflow , we have done division arithmetic
+
+    if(cols == 0 || rows == 0) return false;
+
+    int needed_col = (n + rows -1)/rows;
+
+    return needed_col <= cols;
 }
 
 void solve()
@@ -21,6 +28,7 @@ void solve()
 
     int lo =1;
     int hi = max(w, h) * n;
+
     int ans;
     while(lo <= hi){
         int mid = lo + (hi-lo)/2;

@@ -13,10 +13,20 @@ void solve()
     cin >> n >> k;
     vector<int> a(n);
     for(int &x:a) cin>>x;
-    
-    int lo = 1;
-    int hi = *max_element(a.begin(), a.end()) * k;
+    int ans = 0;
+    int r = 0;
 
+    for(int l=0; l<n; l++){
+        while(r<n && a[r]-a[l]<=k) r++;
+        int len = r-l-1;
+        int ways = 0;
+        if(len>=2)
+         ways = len * (len-1)/2;
+        ans += ways;
+
+    }
+    cout<<ans<<'\n';
+    
 }
 
 int32_t main()
@@ -25,7 +35,7 @@ int32_t main()
     cin.tie(nullptr);
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
         solve();
 
